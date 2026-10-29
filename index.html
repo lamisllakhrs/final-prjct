@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>finall project</title>
+    <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>GUESSING GAME</h1>
+<h2 class="title">guess a number between 0-10
+    reach 15points to win 
+    keep an eye for your lifes!
+</h2>
+<main>
+<div class="selection">
+<h3>choose level:</h3>
+<div class="button-container">
+<button id="baby_mode">easy</button>
+<button id="normal_mode">normal</button>
+<button id="hard_mode">hard</button>
+</div>
+</div>
+<div class="game-state">
+<div class="states">
+<p class="stat" id="life">lives:0</p>
+<p class="stat" id="score">score=0</p>
+<input type="number" id="answer">
+<button id="submit">go--</button>
+</div>
+<div class="game">
+    <div class="dice_active">
+        <img src="assets/diceRollNew.gif" alt="dice" id="dice">
+        <h2>loading...</h2>
+    </div>
+    <div class="stand_by">
+        <img src="assets/quest.webp" alt="?" id="quest-marke">
+        <h2>guess the number!</h2>
+    </div>
+    <div class="result"><h2 id="result-X">YOU GUESSED RIGHT!</h2></div>
+    <p id="result_emoji">🤩</p>
+    <p id="result_expected">the correct answer is..</p>
+    <p id="result_guess">the guessed answer is..</p>
+</div>
+<div class="can">
+    <img src="assets/deez.jpg" alt="can" id="a-can">
+</div>
+</div>
+</main>
+</body>
+</html>

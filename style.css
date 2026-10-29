@@ -1,0 +1,382 @@
+/* ===========================
+   Fonts & Design Tokens
+   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-1: #a8edea;
+    --bg-2: #fed6e3;
+    --card: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(255, 255, 255, 0.9);
+    --primary: #7c5cff;
+    --primary-dark: #5b3fe0;
+    --accent: #ff8fab;
+    --accent-dark: #f0607f;
+    --text: #2d2a4a;
+    --muted: #7a7799;
+    --disabled: #d9d6e6;
+    --radius-lg: 28px;
+    --radius-md: 16px;
+    --shadow-soft: 0 10px 30px rgba(124, 92, 255, 0.15);
+    --shadow-strong: 0 20px 50px rgba(45, 42, 74, 0.18);
+    --transition: 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ===========================
+   Page
+   =========================== */
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Fredoka', sans-serif;
+    color: var(--text);
+    background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+/* Floating decorative blobs */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    z-index: -1;
+    animation: float 12s ease-in-out infinite;
+}
+
+body::before {
+    width: 380px;
+    height: 380px;
+    background: #c3b5ff;
+    top: -100px;
+    left: -100px;
+}
+
+body::after {
+    width: 320px;
+    height: 320px;
+    background: #ffc2d4;
+    bottom: -80px;
+    right: -80px;
+    animation-delay: -6s;
+}
+
+/* ===========================
+   Header
+   =========================== */
+h1 {
+    text-align: center;
+    margin: 0;
+    padding-top: 32px;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 4px 12px rgba(124, 92, 255, 0.25));
+}
+
+.title {
+    text-align: center;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+/* ===========================
+   Layout
+   =========================== */
+main {
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ===========================
+   Selection Screen
+   =========================== */
+.selection {
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 2px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 40px 50px;
+    box-shadow: var(--shadow-strong);
+    animation: popIn 0.5s var(--transition) both;
+}
+
+.selection.active {
+    display: none;
+}
+
+.selection h3 {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+    margin: 0 0 28px;
+    color: var(--text);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.button-container button {
+    font-family: inherit;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    padding: 14px 32px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition), box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.button-container button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 16px 30px rgba(124, 92, 255, 0.3);
+    filter: brightness(1.08);
+}
+
+.button-container button:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* ===========================
+   Game Card
+   =========================== */
+.game-state {
+    width: min(1100px, 92%);
+    min-height: 67vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 2px solid var(--card-border);
+    padding: 3%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-strong);
+}
+
+.game-state.active {
+    display: flex;
+    animation: popIn 0.5s var(--transition) both;
+}
+
+/* ===========================
+   Side Buttons (States)
+   =========================== */
+.states {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-right: 24px;
+    border-right: 2px dashed rgba(124, 92, 255, 0.25);
+}
+
+.states button {
+    font-family: inherit;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--primary-dark);
+    background: white;
+    padding: 14px 18px;
+    border: 2px solid rgba(124, 92, 255, 0.2);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(124, 92, 255, 0.08);
+    transition: transform var(--transition), background 0.25s ease,
+                color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.states button:hover:not([disabled]) {
+    background: var(--primary);
+    color: white;
+    transform: translateX(6px);
+    box-shadow: var(--shadow-soft);
+}
+
+.states button:active:not([disabled]) {
+    transform: translateX(2px) scale(0.97);
+}
+
+.states button[disabled] {
+    background: var(--disabled);
+    color: #a09cb8;
+    border-color: transparent;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* ===========================
+   Game Area
+   =========================== */
+.game {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.dice_active,
+.stand_by,
+.result {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: fadeUp 0.4s ease both;
+}
+
+.dice_active {
+    display: flex;
+}
+
+#dice {
+    width: 50%;
+    max-width: 220px;
+    filter: drop-shadow(0 14px 20px rgba(45, 42, 74, 0.25));
+    transition: transform 0.4s var(--transition);
+    cursor: pointer;
+}
+
+#dice:hover {
+    transform: rotate(-10deg) scale(1.08);
+}
+
+/* Add class="rolling" to #dice from JS while it rolls */
+#dice.rolling {
+    animation: roll 0.6s ease-in-out infinite;
+}
+
+#result-X {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: var(--text);
+}
+
+#result_emoji {
+    font-size: 400%;
+    margin: 0;
+    animation: bounce 1.2s ease-in-out infinite;
+}
+
+/* ===========================
+   Can
+   =========================== */
+.can {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+#a-can {
+    width: 100%;
+    max-width: 200px;
+    filter: drop-shadow(0 12px 18px rgba(45, 42, 74, 0.2));
+    transition: transform 0.4s var(--transition);
+}
+
+#a-can:hover {
+    transform: translateY(-6px) rotate(4deg);
+}
+
+/* ===========================
+   Animations
+   =========================== */
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-14px); }
+}
+
+@keyframes roll {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(30px, 40px); }
+}
+
+/* ===========================
+   Mobile
+   =========================== */
+@media (max-width: 768px) {
+    .game-state.active {
+        flex-direction: column;
+        padding: 24px 16px;
+    }
+
+    .states {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        border-right: none;
+        border-bottom: 2px dashed rgba(124, 92, 255, 0.25);
+        padding: 0 0 20px;
+    }
+
+    .states button:hover:not([disabled]) {
+        transform: translateY(-3px);
+    }
+
+    .game,
+    .can {
+        width: 100%;
+    }
+
+    .selection {
+        padding: 30px 20px;
+    }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
